@@ -11,8 +11,11 @@ def home():
 
 @app.route("/emotionDetector")
 def detect():
-    text_to_analyze = request.args.get('textToAnalyze')
+    text_to_analyze = request.args.get('textToAnalyze') or ""
     emotions = emotion_detector(text_to_analyze)
+    
+
+
     return    f"""For the given statement, the system response is 
     'anger': {emotions["anger"]}
     , 'disgust': {emotions["disgust"]}
@@ -25,6 +28,6 @@ def detect():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000, debug=True)
 
 print(emotion_detector("I'm so happy I could explode"))
